@@ -11,7 +11,7 @@
     "release:app": "set VITE_PREVIEW_MODE=false && npm run dev"
   },
   "dependencies": {
-    "firebase": "^10.14.1",
+    "firebase": "^12.1.0",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.454.0",
     "react": "^18.2.0",
@@ -22,6 +22,6 @@
     "@types/react-dom": "^18.2.0",
     "@vitejs/plugin-react": "^5.0.1",
     "typescript": "^5.6.2",
-    "vite": "^5.4.0"
+    "vite": "^7.1.3"
   }
 }
