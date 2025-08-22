@@ -21,13 +21,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node
+      - name: Use Node 20
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Install deps
-        run: npm ci
+      # If you don't commit package-lock.json, npm ci fails.
+      - name: Install dependencies
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      # Ensure vite's react plugin exists (avoids “Cannot find @vitejs/plugin-react”)
+      - name: Ensure Vite React plugin
+        run: |
+          node -e "try{require.resolve('@vitejs/plugin-react');process.exit(0)}catch(e){process.exit(1)}" \
+          || npm i -D @vitejs/plugin-react
+
+      - name: Print Node/npm versions (debug)
+        run: |
+          node -v
+          npm -v
 
       - name: Build (release mode)
         env:
@@ -37,7 +54,6 @@ jobs:
       - name: SPA fallback (copy 404.html)
         run: cp dist/index.html dist/404.html
 
-      # Use the PAGES artifact action (NOT the deprecated upload-artifact v3)
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
