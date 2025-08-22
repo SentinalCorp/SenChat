@@ -1,0 +1,28 @@
+{
+  "name": "SenChat",
+  "private": true,
+  "version": "1.1.0",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "app:preview": "set ELECTRON_START_URL=http://localhost:5173 && set VITE_PREVIEW_MODE=true && npm run dev",
+    "app:release": "set VITE_PREVIEW_MODE=false && npm run build && npx electron ."
+  },
+  "dependencies": {
+    "firebase": "^10.14.1",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.454.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "electron": "^31.0.0",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.0"
+  }
+}
